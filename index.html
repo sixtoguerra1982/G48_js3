@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .container{
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label>Letra:</label>
+        <input type="text" id="text_letter" maxlength="1"> 
+        <label>Palabra:</label>
+        <input type="text" id="text_word"> 
+    </form>
+    <p id ="texto-entrada">
+        Hola soy un texto de entrada !!!
+    </p>
+    <div id="resultados">
+        <h1>Resultados</h1>
+    </div>
+    <script>
+        var text_letter = document.getElementById('text_letter')
+        text_letter.addEventListener('change', (event) => {
+                //    console.log("cambio *")
+                // const resultado = document.querySelector('.resultado');
+                // resultado.textContent = `Te gusta el sabor ${event.target.value}`;
+                // var letter_count = letter_count(event.target.value)
+                // console.log(letter_count)
+                letter_count(event.target.value)
+        });
+        function letter_count(letter){
+            var p_input = document.querySelector("#texto-entrada")
+            var cant = 0
+            str_p_input = p_input.innerHTML
+            for (let i = 0; i < str_p_input.length; i++) {
+                if (str_p_input[i] === letter){
+                    cant++
+                }
+            }
+            // return cant
+
+            var resultados = document.querySelector("#resultados")
+
+            var nuevoElemento = document.createElement("p");
+
+            var textoDelElemento = document.createTextNode(cant); 
+
+            nuevoElemento.appendChild(textoDelElemento);
+
+            resultados.appendChild(nuevoElemento);
+
+            
+        }
+    </script>
+</body>
+</html>
