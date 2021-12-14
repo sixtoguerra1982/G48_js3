@@ -17,13 +17,13 @@
         <label>Letra:</label>
         <input type="text" id="text_letter" maxlength="1"> 
         <label>Palabra:</label>
-        <input type="text" id="text_word"> 
+        <input type="text" id="text_word" onchange="word_count()"> 
     </form>
     <p id ="texto-entrada">
         Hola soy un texto de entrada !!!
     </p>
+    <h1>Resultados</h1>
     <div id="resultados">
-        <h1>Resultados</h1>
     </div>
     <script>
         var text_letter = document.getElementById('text_letter')
@@ -48,15 +48,52 @@
 
             var resultados = document.querySelector("#resultados")
 
-            var nuevoElemento = document.createElement("p");
+            while (resultados.firstChild) {
+                resultados.removeChild(resultados.firstChild)
+            }
+            // <p><strong>Letra: </strong><span>Cantidad</span></p>
+            var nuevoElementoP = document.createElement("p")
+            var nuevoElementoStrong = document.createElement("strong")
+            var nuevoElementoSpan = document.createElement("span")
+            let textoDelElemento = document.createTextNode("Letra: " + letter)
+            let textoDelElementoSpan = document.createTextNode(" Cantidad: " + cant)
 
-            var textoDelElemento = document.createTextNode(cant); 
-
-            nuevoElemento.appendChild(textoDelElemento);
-
-            resultados.appendChild(nuevoElemento);
-
+            nuevoElementoP.appendChild(nuevoElementoStrong)
+            nuevoElementoStrong.appendChild(textoDelElemento)
+            nuevoElementoSpan.appendChild(textoDelElementoSpan)
+            nuevoElementoP.appendChild(nuevoElementoSpan)
+            resultados.appendChild(nuevoElementoP)
             
+        }
+
+        function word_count() {
+             var x = document.getElementById("text_word").value;
+
+
+             var p_input = document.querySelector("#texto-entrada")
+             var cant = 0
+             str_p_input = p_input.innerHTML
+             array_words = str_p_input.split(" ")
+             for (let i = 0; i < array_words.length; i++) {
+                if (array_words[i] === x){
+                    cant++
+                }
+            }
+
+             var resultados = document.querySelector("#resultados")
+
+             var nuevoElementoP = document.createElement("p")
+            var nuevoElementoStrong = document.createElement("strong")
+            var nuevoElementoSpan = document.createElement("span")
+            let textoDelElemento = document.createTextNode("Palabra: " + x)
+            let textoDelElementoSpan = document.createTextNode(" Cantidad: " + cant)
+
+            nuevoElementoP.appendChild(nuevoElementoStrong)
+            nuevoElementoStrong.appendChild(textoDelElemento)
+            nuevoElementoSpan.appendChild(textoDelElementoSpan)
+            nuevoElementoP.appendChild(nuevoElementoSpan)
+            resultados.appendChild(nuevoElementoP)
+
         }
     </script>
 </body>
